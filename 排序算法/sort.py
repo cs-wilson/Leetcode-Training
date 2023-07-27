@@ -30,26 +30,30 @@ def insertionSort(nums: list):
     return nums
 
 # 归并排序
-def mergeSort(nums: list):
-    if len(nums) <= 1:
-        return nums
-    mid = len(nums) // 2
-    left = mergeSort(nums[:mid])
-    right = mergeSort(nums[mid:])
-    return merge(left, right)
+def mergeSort(arr):
+    import math
+    if len(arr) < 2:
+        return arr
+    middle = math.floor(len(arr) / 2)
+    left, right = arr[0:middle], arr[middle:]
+    print("Left:", left)
+    print("Right:", right)
+    return merge(mergeSort(left), mergeSort(right))
 
-def merge(left: list, right: list):
+def merge(left, right):
     result = []
     while left and right:
         if left[0] <= right[0]:
             result.append(left.pop(0))
         else:
-            result.append(right.pop())
+            result.append(right.pop(0))
     while left:
-        result.append(left.pop())
+        result.append(left.pop(0))
     while right:
-        result.append(right.pop())
+        result.append(right.pop(0))
+    print("Merging:", result)
     return result
+    
 
 # 快速排序
 def quickSort(nums: list):
@@ -60,7 +64,6 @@ def quickSort(nums: list):
     right_nums = [i for i in nums[1:] if i > pivot]
 
     return quickSort(left_nums) + [pivot] + quickSort(right_nums)
-
 
 nums = [61, 17, 29, 22, 34, 60, 72, 21, 50, 1, 62]
 # print("bubbleSort", bubbleSort(nums))
